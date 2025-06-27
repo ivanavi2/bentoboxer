@@ -11,6 +11,7 @@ import { Separator } from '@/components/ui/separator';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { RotateCcw, Plus } from 'lucide-react';
 import { DimensionControls } from './DimensionControls';
+import { StyleControls } from './StyleControls';
 
 export function ConfigPanel() {
   const { 
@@ -89,6 +90,9 @@ export function ConfigPanel() {
           </Button>
         </CardContent>
       </Card>
+
+      {/* Style Controls */}
+      <StyleControls />
 
       <Separator />
 

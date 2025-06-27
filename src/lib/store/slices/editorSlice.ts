@@ -1,7 +1,7 @@
 // Zustand slice for grid editor state and actions
 
 import { StateCreator } from 'zustand';
-import { GridConfig, GridBox } from '../../types';
+import { GridConfig, GridBox, BoxStyling } from '../../types';
 
 export interface EditorSlice {
   config: GridConfig;
@@ -13,6 +13,7 @@ export interface EditorSlice {
   addBox: (box: GridBox) => void;
   removeBox: (boxId: string) => void;
   updateBox: (boxId: string, updates: Partial<GridBox>) => void;
+  updateBoxStyling: (boxId: string, styling: Partial<BoxStyling>) => void;
   resetConfig: () => void;
 }
 
@@ -56,6 +57,17 @@ export const createEditorSlice: StateCreator<EditorSlice> = (set) => ({
       ...state.config,
       boxes: state.config.boxes.map(box =>
         box.id === boxId ? { ...box, ...updates } : box
+      )
+    }
+  })),
+
+  updateBoxStyling: (boxId, styling) => set((state) => ({
+    config: {
+      ...state.config,
+      boxes: state.config.boxes.map(box =>
+        box.id === boxId 
+          ? { ...box, styling: { ...box.styling, ...styling } }
+          : box
       )
     }
   })),

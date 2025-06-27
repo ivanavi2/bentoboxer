@@ -1,5 +1,19 @@
 // Type definitions for grid configuration and box properties
 
+export interface BoxStyling {
+  backgroundColor?: string;
+  textColor?: string;
+  borderColor?: string;
+  borderWidth?: number;
+  borderStyle?: 'solid' | 'dashed' | 'dotted' | 'none';
+  borderRadius?: number;
+  boxShadow?: string;
+  fontFamily?: string;
+  fontSize?: number;
+  fontWeight?: number;
+  padding?: number;
+}
+
 export interface GridBox {
   id: string;
   x: number;
@@ -7,6 +21,7 @@ export interface GridBox {
   width: number;
   height: number;
   content?: string;
+  styling?: BoxStyling;
 }
 
 export interface GridConfig {

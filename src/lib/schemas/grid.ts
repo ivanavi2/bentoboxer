@@ -2,6 +2,20 @@
 
 import { z } from 'zod';
 
+export const BoxStylingSchema = z.object({
+  backgroundColor: z.string().optional(),
+  textColor: z.string().optional(),
+  borderColor: z.string().optional(),
+  borderWidth: z.number().min(0).max(20).optional(),
+  borderStyle: z.enum(['solid', 'dashed', 'dotted', 'none']).optional(),
+  borderRadius: z.number().min(0).max(50).optional(),
+  boxShadow: z.string().optional(),
+  fontFamily: z.string().optional(),
+  fontSize: z.number().min(8).max(72).optional(),
+  fontWeight: z.number().min(100).max(900).optional(),
+  padding: z.number().min(0).max(100).optional(),
+}).optional();
+
 export const GridBoxSchema = z.object({
   id: z.string().min(1),
   x: z.number().min(0),
@@ -9,6 +23,7 @@ export const GridBoxSchema = z.object({
   width: z.number().min(1),
   height: z.number().min(1),
   content: z.string().optional(),
+  styling: BoxStylingSchema,
 });
 
 export const GridConfigSchema = z.object({
@@ -28,6 +43,7 @@ export const EditorStateSchema = z.object({
   theme: z.enum(['light', 'dark']),
 });
 
+export type BoxStyling = z.infer<typeof BoxStylingSchema>;
 export type GridBox = z.infer<typeof GridBoxSchema>;
 export type GridConfig = z.infer<typeof GridConfigSchema>;
 export type EditorState = z.infer<typeof EditorStateSchema>;
