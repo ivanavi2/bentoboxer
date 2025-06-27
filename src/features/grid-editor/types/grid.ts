@@ -1,0 +1,1 @@
+// Type definitions specific to grid editor functionality

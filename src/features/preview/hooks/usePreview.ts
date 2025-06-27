@@ -1,0 +1,1 @@
+// Custom hook for managing preview state and responsive breakpoints

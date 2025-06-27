@@ -1,0 +1,1 @@
+// Custom clipboard utility as alternative to react-copy-to-clipboard

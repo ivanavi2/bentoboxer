@@ -1,0 +1,1 @@
+// Generator for Tailwind CSS classes from bento grid configuration

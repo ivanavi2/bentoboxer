@@ -1,0 +1,1 @@
+// React error boundary component for catching and handling errors

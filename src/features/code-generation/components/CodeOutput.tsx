@@ -1,0 +1,1 @@
+// Component for displaying generated HTML/CSS code with syntax highlighting

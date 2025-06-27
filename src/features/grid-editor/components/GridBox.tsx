@@ -1,0 +1,1 @@
+// Individual grid box component with drag/drop and selection capabilities

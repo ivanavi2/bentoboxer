@@ -1,0 +1,1 @@
+// Utility functions for error handling and user-friendly error messages

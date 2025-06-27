@@ -1,0 +1,1 @@
+// Utility functions for grid layout calculations and positioning

@@ -1,0 +1,1 @@
+// Responsive preview component with device breakpoint simulation

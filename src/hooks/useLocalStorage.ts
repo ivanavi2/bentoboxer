@@ -1,0 +1,1 @@
+// Custom hook for managing localStorage with type safety

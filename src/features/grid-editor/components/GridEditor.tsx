@@ -1,0 +1,1 @@
+// Main grid editor component for interactive bento grid creation

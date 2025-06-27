@@ -1,0 +1,1 @@
+// Type definitions for API responses and external data structures
