@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { RotateCcw, Plus } from 'lucide-react';
 import { DimensionControls } from './DimensionControls';
 import { StyleControls } from './StyleControls';
+import { findNextAvailablePosition } from '@/lib/utils/gridUtils';
 
 export function ConfigPanel() {
   const { 
@@ -22,10 +23,18 @@ export function ConfigPanel() {
   } = useStore();
 
   const handleAddBox = () => {
+    const position = findNextAvailablePosition(config, 1, 1);
+    
+    if (!position) {
+      // Grid is full, could show a notification or expand grid
+      console.warn('No available space for new box');
+      return;
+    }
+    
     const newBox = {
       id: `box-${Date.now()}`,
-      x: 0,
-      y: 0,
+      x: position.x,
+      y: position.y,
       width: 1,
       height: 1,
       content: `Box ${config.boxes.length + 1}`
