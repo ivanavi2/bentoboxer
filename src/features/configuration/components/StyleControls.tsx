@@ -239,7 +239,7 @@ export function StyleControls() {
                     onClick={() => updateStyling({ boxShadow: shadow })}
                   >
                     <div
-                      className="w-6 h-6 bg-gray-200 rounded mr-3 flex-shrink-0"
+                      className="w-6 h-6 bg-gray-200 rounded mr-3 shrink-0"
                       style={{ boxShadow: shadow === 'none' ? 'none' : shadow }}
                     />
                     <span className="text-xs font-mono truncate">
