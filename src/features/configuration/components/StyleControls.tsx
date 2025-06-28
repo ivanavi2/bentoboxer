@@ -8,8 +8,9 @@ import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import { Palette, Square, Frame, Type } from 'lucide-react';
+import { Palette, Square, Frame, Type, Expand } from 'lucide-react';
 import { BoxStyling } from '@/lib/types';
+import { canPlaceBoxAt } from '@/lib/utils/gridUtils';
 
 const COLOR_PRESETS = [
   '#ffffff', '#f3f4f6', '#e5e7eb', '#d1d5db', '#9ca3af', '#6b7280', '#374151', '#111827',
@@ -92,7 +93,7 @@ function ColorPicker({ value, onChange, label }: ColorPickerProps) {
 }
 
 export function StyleControls() {
-  const { selectedBox, config, updateBoxStyling } = useStore();
+  const { selectedBox, config, updateBoxStyling, updateBox } = useStore();
   
   const selectedBoxData = selectedBox 
     ? config.boxes.find(box => box.id === selectedBox)
@@ -116,6 +117,24 @@ export function StyleControls() {
     updateBoxStyling(selectedBox, updates);
   };
 
+  const updateDimensions = (width: number, height: number) => {
+    // Check if the new dimensions would cause overlap
+    if (canPlaceBoxAt(selectedBoxData.x, selectedBoxData.y, width, height, config, selectedBox)) {
+      updateBox(selectedBox, { width, height });
+    } else {
+      // Could add toast notification here for invalid resize
+      console.warn(`Cannot resize box to ${width}x${height} - would overlap with existing boxes`);
+    }
+  };
+
+  const canResizeToWidth = (width: number) => {
+    return canPlaceBoxAt(selectedBoxData.x, selectedBoxData.y, width, selectedBoxData.height, config, selectedBox);
+  };
+
+  const canResizeToHeight = (height: number) => {
+    return canPlaceBoxAt(selectedBoxData.x, selectedBoxData.y, selectedBoxData.width, height, config, selectedBox);
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -125,23 +144,22 @@ export function StyleControls() {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <Tabs defaultValue="colors" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="colors" className="text-xs">
-              <Square className="h-3 w-3 mr-1" />
-              Colors
+        <Tabs defaultValue="dimensions" className="w-full">
+          <TabsList className="grid w-full grid-cols-5">
+            <TabsTrigger value="dimensions" className="text-xs min-w-0 flex items-center justify-center border-secondary cursor-pointer hover:border-secondary/80" title="Size">
+              <Expand className="h-3 w-3" />
             </TabsTrigger>
-            <TabsTrigger value="borders" className="text-xs">
-              <Frame className="h-3 w-3 mr-1" />
-              Borders
+            <TabsTrigger value="colors" className="text-xs min-w-0 flex items-center justify-center border-secondary cursor-pointer hover:border-secondary/80" title="Colors">
+              <Square className="h-3 w-3" />
             </TabsTrigger>
-            <TabsTrigger value="shadows" className="text-xs">
-              <div className="h-3 w-3 mr-1 bg-current rounded opacity-50" />
-              Shadows
+            <TabsTrigger value="borders" className="text-xs min-w-0 flex items-center justify-center border-secondary cursor-pointer hover:border-secondary/80" title="Borders">
+              <Frame className="h-3 w-3" />
             </TabsTrigger>
-            <TabsTrigger value="typography" className="text-xs">
-              <Type className="h-3 w-3 mr-1" />
-              Text
+            <TabsTrigger value="shadows" className="text-xs min-w-0 flex items-center justify-center border-secondary cursor-pointer hover:border-secondary/80" title="Shadows">
+              <div className="h-3 w-3 bg-current rounded opacity-50" />
+            </TabsTrigger>
+            <TabsTrigger value="typography" className="text-xs min-w-0 flex items-center justify-center border-secondary cursor-pointer hover:border-secondary/80" title="Text">
+              <Type className="h-3 w-3" />
             </TabsTrigger>
           </TabsList>
           
@@ -294,6 +312,52 @@ export function StyleControls() {
                 value={[styling.padding || 0]}
                 onValueChange={([value]) => updateStyling({ padding: value })}
               />
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="dimensions" className="space-y-4 mt-4">
+            <div className="space-y-2">
+              <Label>Width (Columns): {selectedBoxData.width}</Label>
+              <Slider
+                min={1}
+                max={Math.min(config.columns, selectedBoxData.x + config.columns)}
+                step={1}
+                value={[selectedBoxData.width]}
+                onValueChange={([value]) => updateDimensions(value, selectedBoxData.height)}
+                className={!canResizeToWidth(selectedBoxData.width) ? 'opacity-50' : ''}
+              />
+              <p className="text-xs text-muted-foreground">
+                Box will span {selectedBoxData.width} column{selectedBoxData.width > 1 ? 's' : ''}
+                {!canResizeToWidth(selectedBoxData.width + 1) && selectedBoxData.width < config.columns && (
+                  <span className="text-orange-600 ml-2">• Cannot expand further (would overlap)</span>
+                )}
+              </p>
+            </div>
+            
+            <div className="space-y-2">
+              <Label>Height (Rows): {selectedBoxData.height}</Label>
+              <Slider
+                min={1}
+                max={Math.min(config.rows, selectedBoxData.y + config.rows)}
+                step={1}
+                value={[selectedBoxData.height]}
+                onValueChange={([value]) => updateDimensions(selectedBoxData.width, value)}
+                className={!canResizeToHeight(selectedBoxData.height) ? 'opacity-50' : ''}
+              />
+              <p className="text-xs text-muted-foreground">
+                Box will span {selectedBoxData.height} row{selectedBoxData.height > 1 ? 's' : ''}
+                {!canResizeToHeight(selectedBoxData.height + 1) && selectedBoxData.height < config.rows && (
+                  <span className="text-orange-600 ml-2">• Cannot expand further (would overlap)</span>
+                )}
+              </p>
+            </div>
+            
+            <div className="py-3 bg-muted rounded text-xs">
+              <p className="font-medium mb-1">Current Size:</p>
+              <p>{selectedBoxData.width}×{selectedBoxData.height} cells</p>
+              <p className="text-muted-foreground mt-1">
+                Position: Column {selectedBoxData.x + 1}, Row {selectedBoxData.y + 1}
+              </p>
             </div>
           </TabsContent>
         </Tabs>

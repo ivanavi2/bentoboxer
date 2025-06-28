@@ -92,11 +92,14 @@ export function ConfigPanel() {
         <CardHeader>
           <CardTitle className="text-sm">Boxes ({config.boxes.length})</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-2">
           <Button onClick={handleAddBox} variant="outline" className="w-full">
             <Plus className="h-4 w-4 mr-2" />
-            Add Box
+            Add Box (1×1)
           </Button>
+          <p className="text-xs text-muted-foreground text-center">
+            Select a box to change its size in the styling panel
+          </p>
         </CardContent>
       </Card>
 

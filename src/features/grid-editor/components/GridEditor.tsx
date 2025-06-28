@@ -5,7 +5,7 @@ import { useStore } from '@/lib/store';
 import { GridBox } from './GridBox';
 import { GridCell } from './GridCell';
 import { useGridDragDrop } from '../hooks/useGridDragDrop';
-import { isPositionOccupied } from '@/lib/utils/gridUtils';
+import { isPositionOccupied, canPlaceBoxAt } from '@/lib/utils/gridUtils';
 
 export function GridEditor() {
   const { config, selectedBox, setSelectedBox } = useStore();
@@ -75,13 +75,22 @@ export function GridEditor() {
     
     for (let y = 0; y < config.rows; y++) {
       for (let x = 0; x < config.columns; x++) {
-        const isOccupied = isPositionOccupied(x, y, config.boxes);
+        // Exclude the currently dragged box from occupation check
+        const excludeId = activeBox?.id;
+        const isOccupied = isPositionOccupied(x, y, config.boxes, excludeId);
+        
+        // Check if the dragged box can be placed at this position
+        const canDrop = activeBox ? 
+          canPlaceBoxAt(x, y, activeBox.width, activeBox.height, config, activeBox.id) :
+          true;
+        
         cells.push(
           <GridCell
             key={`cell-${x}-${y}`}
             x={x}
             y={y}
             isOccupied={isOccupied}
+            canDrop={canDrop}
           />
         );
       }
