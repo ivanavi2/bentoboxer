@@ -11,6 +11,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sora)", "system-ui", "sans-serif"],
+      },
       fontSize: {
         'xs': ['12px', { lineHeight: '16px', letterSpacing: '0.05em' }],
         'sm': ['14px', { lineHeight: '20px', letterSpacing: '0.025em' }],

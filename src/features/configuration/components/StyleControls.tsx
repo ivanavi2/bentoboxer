@@ -50,7 +50,7 @@ interface ColorPickerProps {
 function ColorPicker({ value, onChange, label }: ColorPickerProps) {
   return (
     <div className="space-y-2">
-      <Label>{label}</Label>
+      <Label className="font-medium">{label}</Label>
       <div className="space-y-2">
         {/* Current color and custom input */}
         <div className="flex items-center gap-2">
@@ -103,7 +103,7 @@ export function StyleControls() {
     return (
       <Card>
         <CardContent className="pt-6">
-          <p className="text-sm text-muted-foreground text-center">
+          <p className="text-sm font-normal text-muted-foreground text-center">
             Select a box to customize its styling
           </p>
         </CardContent>
@@ -138,7 +138,7 @@ export function StyleControls() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg flex items-center gap-2">
+        <CardTitle className="text-lg font-semibold flex items-center gap-2">
           <Palette className="h-4 w-4" />
           Box Styling
         </CardTitle>
@@ -185,7 +185,7 @@ export function StyleControls() {
             />
             
             <div className="space-y-2">
-              <Label>Border Width: {styling.borderWidth || 0}px</Label>
+              <Label className="font-medium">Border Width: {styling.borderWidth || 0}px</Label>
               <Slider
                 min={0}
                 max={10}
@@ -196,7 +196,7 @@ export function StyleControls() {
             </div>
             
             <div className="space-y-2">
-              <Label>Border Style</Label>
+              <Label className="font-medium">Border Style</Label>
               <Select
                 value={styling.borderStyle || 'solid'}
                 onValueChange={(value: 'solid' | 'dashed' | 'dotted' | 'none') => 
@@ -216,7 +216,7 @@ export function StyleControls() {
             </div>
             
             <div className="space-y-2">
-              <Label>Border Radius: {styling.borderRadius || 0}px</Label>
+              <Label className="font-medium">Border Radius: {styling.borderRadius || 0}px</Label>
               <Slider
                 min={0}
                 max={50}
@@ -229,7 +229,7 @@ export function StyleControls() {
           
           <TabsContent value="shadows" className="space-y-4 mt-4">
             <div className="space-y-2">
-              <Label>Shadow Presets</Label>
+              <Label className="font-medium">Shadow Presets</Label>
               <div className="space-y-2">
                 {SHADOW_PRESETS.map((shadow, index) => (
                   <Button
@@ -251,7 +251,7 @@ export function StyleControls() {
             </div>
             
             <div className="space-y-2">
-              <Label>Custom Shadow</Label>
+              <Label className="font-medium">Custom Shadow</Label>
               <Input
                 value={styling.boxShadow || ''}
                 onChange={(e) => updateStyling({ boxShadow: e.target.value })}
@@ -263,7 +263,7 @@ export function StyleControls() {
           
           <TabsContent value="typography" className="space-y-4 mt-4">
             <div className="space-y-2">
-              <Label>Font Family</Label>
+              <Label className="font-medium">Font Family</Label>
               <Select
                 value={styling.fontFamily || 'Inter, sans-serif'}
                 onValueChange={(value) => updateStyling({ fontFamily: value })}
@@ -282,7 +282,7 @@ export function StyleControls() {
             </div>
             
             <div className="space-y-2">
-              <Label>Font Size: {styling.fontSize || 16}px</Label>
+              <Label className="font-medium">Font Size: {styling.fontSize || 16}px</Label>
               <Slider
                 min={8}
                 max={48}
@@ -293,7 +293,7 @@ export function StyleControls() {
             </div>
             
             <div className="space-y-2">
-              <Label>Font Weight: {styling.fontWeight || 400}</Label>
+              <Label className="font-medium">Font Weight: {styling.fontWeight || 400}</Label>
               <Slider
                 min={100}
                 max={900}
@@ -304,7 +304,7 @@ export function StyleControls() {
             </div>
             
             <div className="space-y-2">
-              <Label>Padding: {styling.padding || 0}px</Label>
+              <Label className="font-medium">Padding: {styling.padding || 0}px</Label>
               <Slider
                 min={0}
                 max={50}
@@ -317,7 +317,7 @@ export function StyleControls() {
           
           <TabsContent value="dimensions" className="space-y-4 mt-4">
             <div className="space-y-2">
-              <Label>Width (Columns): {selectedBoxData.width}</Label>
+              <Label className="font-medium">Width (Columns): {selectedBoxData.width}</Label>
               <Slider
                 min={1}
                 max={Math.min(config.columns, selectedBoxData.x + config.columns)}
@@ -326,7 +326,7 @@ export function StyleControls() {
                 onValueChange={([value]) => updateDimensions(value, selectedBoxData.height)}
                 className={!canResizeToWidth(selectedBoxData.width) ? 'opacity-50' : ''}
               />
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs font-normal text-muted-foreground">
                 Box will span {selectedBoxData.width} column{selectedBoxData.width > 1 ? 's' : ''}
                 {!canResizeToWidth(selectedBoxData.width + 1) && selectedBoxData.width < config.columns && (
                   <span className="text-orange-600 ml-2">• Cannot expand further (would overlap)</span>
@@ -335,7 +335,7 @@ export function StyleControls() {
             </div>
             
             <div className="space-y-2">
-              <Label>Height (Rows): {selectedBoxData.height}</Label>
+              <Label className="font-medium">Height (Rows): {selectedBoxData.height}</Label>
               <Slider
                 min={1}
                 max={Math.min(config.rows, selectedBoxData.y + config.rows)}
@@ -344,7 +344,7 @@ export function StyleControls() {
                 onValueChange={([value]) => updateDimensions(selectedBoxData.width, value)}
                 className={!canResizeToHeight(selectedBoxData.height) ? 'opacity-50' : ''}
               />
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs font-normal text-muted-foreground">
                 Box will span {selectedBoxData.height} row{selectedBoxData.height > 1 ? 's' : ''}
                 {!canResizeToHeight(selectedBoxData.height + 1) && selectedBoxData.height < config.rows && (
                   <span className="text-orange-600 ml-2">• Cannot expand further (would overlap)</span>
@@ -352,10 +352,12 @@ export function StyleControls() {
               </p>
             </div>
             
-            <div className="py-3 bg-muted rounded text-xs">
-              <p className="font-medium mb-1">Current Size:</p>
-              <p>{selectedBoxData.width}×{selectedBoxData.height} cells</p>
-              <p className="text-muted-foreground mt-1">
+            <div className="p-4 bg-muted rounded-lg space-y-2">
+              <div className="flex items-center gap-2">
+                <span className="body-small font-medium">Current Size:</span>
+                <span className="body-small">{selectedBoxData.width}×{selectedBoxData.height} cells</span>
+              </div>
+              <p className="caption">
                 Position: Column {selectedBoxData.x + 1}, Row {selectedBoxData.y + 1}
               </p>
             </div>

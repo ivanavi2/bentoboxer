@@ -6,6 +6,7 @@ import { useStore } from '@/lib/store';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/shared/ThemeToggle';
 import { Menu, Download, Code, Eye } from 'lucide-react';
+import Image from 'next/image';
 
 export function Header() {
   const { toggleSidebar, viewMode, setViewMode, outputFormat, setOutputFormat } = useStore();
@@ -23,8 +24,14 @@ export function Header() {
             <Menu className="h-4 w-4" />
           </Button>
           <div className="flex items-center gap-2">
-            <div className="h-6 w-6 rounded bg-linear-to-br from-blue-500 to-purple-600" />
-            <h1 className="text-2xl font-semibold tracking-tight">BentoBoxer</h1>
+            <Image
+              src="/logo.png"
+              alt="BentoBoxer Logo"
+              width={24}
+              height={24}
+              className="rounded"
+            />
+            <h1 className="text-2xl font-bold tracking-tight">BentoBoxer</h1>
           </div>
         </div>
 

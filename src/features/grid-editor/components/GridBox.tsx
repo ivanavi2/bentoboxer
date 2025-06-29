@@ -96,9 +96,9 @@ export function GridBox({ box, isSelected, onSelect }: GridBoxProps) {
       
       <div className="h-full w-full flex items-center justify-center">
         {box.content ? (
-          <span className="text-center break-words">{box.content}</span>
+          <span className="font-medium text-center break-words">{box.content}</span>
         ) : (
-          <span className="text-gray-400 text-sm">
+          <span className="text-gray-400 text-sm font-normal">
             Box {box.id.slice(-4)}
           </span>
         )}
