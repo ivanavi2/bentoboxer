@@ -13,11 +13,11 @@ export function DimensionControls() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg font-semibold">Grid Dimensions</CardTitle>
+        <CardTitle className="heading-5">Grid Dimensions</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="columns" className="font-medium">Columns: {config.columns}</Label>
+          <Label htmlFor="columns" className="body-small font-medium">Columns: {config.columns}</Label>
           <Slider
             id="columns"
             min={1}
@@ -29,7 +29,7 @@ export function DimensionControls() {
         </div>
         
         <div className="space-y-2">
-          <Label htmlFor="rows" className="font-medium">Rows: {config.rows}</Label>
+          <Label htmlFor="rows" className="body-small font-medium">Rows: {config.rows}</Label>
           <Slider
             id="rows"
             min={1}
@@ -41,7 +41,7 @@ export function DimensionControls() {
         </div>
         
         <div className="space-y-2">
-          <Label htmlFor="gap" className="font-medium">Gap: {config.gap}px</Label>
+          <Label htmlFor="gap" className="body-small font-medium">Gap: {config.gap}px</Label>
           <Slider
             id="gap"
             min={0}

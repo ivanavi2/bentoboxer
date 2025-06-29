@@ -50,7 +50,7 @@ interface ColorPickerProps {
 function ColorPicker({ value, onChange, label }: ColorPickerProps) {
   return (
     <div className="space-y-2">
-      <Label className="font-medium">{label}</Label>
+      <Label className="body-small font-medium">{label}</Label>
       <div className="space-y-2">
         {/* Current color and custom input */}
         <div className="flex items-center gap-2">
@@ -103,7 +103,7 @@ export function StyleControls() {
     return (
       <Card>
         <CardContent className="pt-6">
-          <p className="text-sm font-normal text-muted-foreground text-center">
+          <p className="body-small text-muted-foreground text-center">
             Select a box to customize its styling
           </p>
         </CardContent>
@@ -138,7 +138,7 @@ export function StyleControls() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg font-semibold flex items-center gap-2">
+        <CardTitle className="heading-5 flex items-center gap-2">
           <Palette className="h-4 w-4" />
           Box Styling
         </CardTitle>
@@ -146,19 +146,19 @@ export function StyleControls() {
       <CardContent>
         <Tabs defaultValue="dimensions" className="w-full">
           <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="dimensions" className="text-xs min-w-0 flex items-center justify-center border-secondary cursor-pointer hover:border-secondary/80" title="Size">
+            <TabsTrigger value="dimensions" className="caption min-w-0 flex items-center justify-center border-secondary cursor-pointer hover:border-secondary/80" title="Size">
               <Expand className="h-3 w-3" />
             </TabsTrigger>
-            <TabsTrigger value="colors" className="text-xs min-w-0 flex items-center justify-center border-secondary cursor-pointer hover:border-secondary/80" title="Colors">
+            <TabsTrigger value="colors" className="caption min-w-0 flex items-center justify-center border-secondary cursor-pointer hover:border-secondary/80" title="Colors">
               <Square className="h-3 w-3" />
             </TabsTrigger>
-            <TabsTrigger value="borders" className="text-xs min-w-0 flex items-center justify-center border-secondary cursor-pointer hover:border-secondary/80" title="Borders">
+            <TabsTrigger value="borders" className="caption min-w-0 flex items-center justify-center border-secondary cursor-pointer hover:border-secondary/80" title="Borders">
               <Frame className="h-3 w-3" />
             </TabsTrigger>
-            <TabsTrigger value="shadows" className="text-xs min-w-0 flex items-center justify-center border-secondary cursor-pointer hover:border-secondary/80" title="Shadows">
+            <TabsTrigger value="shadows" className="caption min-w-0 flex items-center justify-center border-secondary cursor-pointer hover:border-secondary/80" title="Shadows">
               <div className="h-3 w-3 bg-current rounded opacity-50" />
             </TabsTrigger>
-            <TabsTrigger value="typography" className="text-xs min-w-0 flex items-center justify-center border-secondary cursor-pointer hover:border-secondary/80" title="Text">
+            <TabsTrigger value="typography" className="caption min-w-0 flex items-center justify-center border-secondary cursor-pointer hover:border-secondary/80" title="Text">
               <Type className="h-3 w-3" />
             </TabsTrigger>
           </TabsList>
@@ -185,7 +185,7 @@ export function StyleControls() {
             />
             
             <div className="space-y-2">
-              <Label className="font-medium">Border Width: {styling.borderWidth || 0}px</Label>
+              <Label className="body-small font-medium">Border Width: {styling.borderWidth || 0}px</Label>
               <Slider
                 min={0}
                 max={10}
@@ -196,7 +196,7 @@ export function StyleControls() {
             </div>
             
             <div className="space-y-2">
-              <Label className="font-medium">Border Style</Label>
+              <Label className="body-small font-medium">Border Style</Label>
               <Select
                 value={styling.borderStyle || 'solid'}
                 onValueChange={(value: 'solid' | 'dashed' | 'dotted' | 'none') => 
@@ -216,7 +216,7 @@ export function StyleControls() {
             </div>
             
             <div className="space-y-2">
-              <Label className="font-medium">Border Radius: {styling.borderRadius || 0}px</Label>
+              <Label className="body-small font-medium">Border Radius: {styling.borderRadius || 0}px</Label>
               <Slider
                 min={0}
                 max={50}
@@ -229,7 +229,7 @@ export function StyleControls() {
           
           <TabsContent value="shadows" className="space-y-4 mt-4">
             <div className="space-y-2">
-              <Label className="font-medium">Shadow Presets</Label>
+              <Label className="body-small font-medium">Shadow Presets</Label>
               <div className="space-y-2">
                 {SHADOW_PRESETS.map((shadow, index) => (
                   <Button
@@ -242,7 +242,7 @@ export function StyleControls() {
                       className="w-6 h-6 bg-gray-200 rounded mr-3 shrink-0"
                       style={{ boxShadow: shadow === 'none' ? 'none' : shadow }}
                     />
-                    <span className="text-xs font-mono truncate">
+                    <span className="caption font-mono truncate">
                       {shadow === 'none' ? 'No shadow' : `Shadow ${index}`}
                     </span>
                   </Button>
@@ -251,19 +251,19 @@ export function StyleControls() {
             </div>
             
             <div className="space-y-2">
-              <Label className="font-medium">Custom Shadow</Label>
+              <Label className="body-small font-medium">Custom Shadow</Label>
               <Input
                 value={styling.boxShadow || ''}
                 onChange={(e) => updateStyling({ boxShadow: e.target.value })}
                 placeholder="0 4px 6px -1px rgb(0 0 0 / 0.1)"
-                className="text-xs font-mono"
+                className="caption font-mono"
               />
             </div>
           </TabsContent>
           
           <TabsContent value="typography" className="space-y-4 mt-4">
             <div className="space-y-2">
-              <Label className="font-medium">Font Family</Label>
+              <Label className="body-small font-medium">Font Family</Label>
               <Select
                 value={styling.fontFamily || 'Inter, sans-serif'}
                 onValueChange={(value) => updateStyling({ fontFamily: value })}
@@ -282,7 +282,7 @@ export function StyleControls() {
             </div>
             
             <div className="space-y-2">
-              <Label className="font-medium">Font Size: {styling.fontSize || 16}px</Label>
+              <Label className="body-small font-medium">Font Size: {styling.fontSize || 16}px</Label>
               <Slider
                 min={8}
                 max={48}
@@ -293,7 +293,7 @@ export function StyleControls() {
             </div>
             
             <div className="space-y-2">
-              <Label className="font-medium">Font Weight: {styling.fontWeight || 400}</Label>
+              <Label className="body-small font-medium">Font Weight: {styling.fontWeight || 400}</Label>
               <Slider
                 min={100}
                 max={900}
@@ -304,7 +304,7 @@ export function StyleControls() {
             </div>
             
             <div className="space-y-2">
-              <Label className="font-medium">Padding: {styling.padding || 0}px</Label>
+              <Label className="body-small font-medium">Padding: {styling.padding || 0}px</Label>
               <Slider
                 min={0}
                 max={50}
@@ -317,7 +317,7 @@ export function StyleControls() {
           
           <TabsContent value="dimensions" className="space-y-4 mt-4">
             <div className="space-y-2">
-              <Label className="font-medium">Width (Columns): {selectedBoxData.width}</Label>
+              <Label className="body-small font-medium">Width (Columns): {selectedBoxData.width}</Label>
               <Slider
                 min={1}
                 max={Math.min(config.columns, selectedBoxData.x + config.columns)}
@@ -326,7 +326,7 @@ export function StyleControls() {
                 onValueChange={([value]) => updateDimensions(value, selectedBoxData.height)}
                 className={!canResizeToWidth(selectedBoxData.width) ? 'opacity-50' : ''}
               />
-              <p className="text-xs font-normal text-muted-foreground">
+              <p className="caption">
                 Box will span {selectedBoxData.width} column{selectedBoxData.width > 1 ? 's' : ''}
                 {!canResizeToWidth(selectedBoxData.width + 1) && selectedBoxData.width < config.columns && (
                   <span className="text-orange-600 ml-2">• Cannot expand further (would overlap)</span>
@@ -335,7 +335,7 @@ export function StyleControls() {
             </div>
             
             <div className="space-y-2">
-              <Label className="font-medium">Height (Rows): {selectedBoxData.height}</Label>
+              <Label className="body-small font-medium">Height (Rows): {selectedBoxData.height}</Label>
               <Slider
                 min={1}
                 max={Math.min(config.rows, selectedBoxData.y + config.rows)}
@@ -344,7 +344,7 @@ export function StyleControls() {
                 onValueChange={([value]) => updateDimensions(selectedBoxData.width, value)}
                 className={!canResizeToHeight(selectedBoxData.height) ? 'opacity-50' : ''}
               />
-              <p className="text-xs font-normal text-muted-foreground">
+              <p className="caption">
                 Box will span {selectedBoxData.height} row{selectedBoxData.height > 1 ? 's' : ''}
                 {!canResizeToHeight(selectedBoxData.height + 1) && selectedBoxData.height < config.rows && (
                   <span className="text-orange-600 ml-2">• Cannot expand further (would overlap)</span>

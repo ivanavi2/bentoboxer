@@ -50,11 +50,11 @@ export function ConfigPanel() {
       {/* Container Settings */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg font-semibold">Container</CardTitle>
+          <CardTitle className="heading-5">Container</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="width" className="font-medium">Width</Label>
+            <Label htmlFor="width" className="body-small font-medium">Width</Label>
             <Input
               id="width"
               value={config.containerWidth}
@@ -64,7 +64,7 @@ export function ConfigPanel() {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="height" className="font-medium">Height</Label>
+            <Label htmlFor="height" className="body-small font-medium">Height</Label>
             <Input
               id="height"
               value={config.containerHeight}
@@ -74,7 +74,7 @@ export function ConfigPanel() {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="radius" className="font-medium">Border Radius: {config.borderRadius}px</Label>
+            <Label htmlFor="radius" className="body-small font-medium">Border Radius: {config.borderRadius}px</Label>
             <Slider
               id="radius"
               min={0}
@@ -90,14 +90,14 @@ export function ConfigPanel() {
       {/* Boxes */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg font-semibold">Boxes ({config.boxes.length})</CardTitle>
+          <CardTitle className="heading-5">Boxes ({config.boxes.length})</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2">
           <Button onClick={handleAddBox} variant="outline" className="w-full">
             <Plus className="h-4 w-4 mr-2" />
             Add Box (1×1)
           </Button>
-          <p className="text-xs font-normal text-muted-foreground text-center">
+          <p className="caption text-center">
             Select a box to change its size in the styling panel
           </p>
         </CardContent>

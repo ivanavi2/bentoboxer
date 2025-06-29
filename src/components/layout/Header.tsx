@@ -29,9 +29,9 @@ export function Header() {
               alt="BentoBoxer Logo"
               width={24}
               height={24}
-              className="rounded"
+              className="rounded mt-1"
             />
-            <h1 className="text-2xl font-bold tracking-tight">BentoBoxer</h1>
+            <h1 className="heading-3 tracking-tight">BentoBoxer</h1>
           </div>
         </div>
 

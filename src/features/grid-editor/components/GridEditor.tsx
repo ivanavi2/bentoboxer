@@ -124,7 +124,7 @@ export function GridEditor() {
           ))}
           
           {config.boxes.length === 0 && (
-            <div className="col-span-full row-span-full flex items-center justify-center text-gray-500 text-lg font-normal">
+            <div className="col-span-full row-span-full flex items-center justify-center text-gray-500 body-large">
               Click &ldquo;Add Box&rdquo; to start creating your bento grid
             </div>
           )}
