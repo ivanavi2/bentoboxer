@@ -4,31 +4,33 @@
 
 
 @theme {
-  /* Light theme colors - Warm earthy palette */
-  --color-background: #F8F9FA;
-  --color-foreground: #2D3A37;
-  --color-card: #F8F9FA;
-  --color-card-foreground: #2D3A37;
-  --color-popover: #F8F9FA;
-  --color-popover-foreground: #2D3A37;
-  --color-primary: #EFBC9B;
-  --color-primary-foreground: #2D3A37;
-  --color-secondary: #E2E8E0;
-  --color-secondary-foreground: #2D3A37;
-  --color-muted: #F1F3F2;
-  --color-muted-foreground: #5A6B5F;
-  --color-accent: #9CAFAA;
-  --color-accent-foreground: #2D3A37;
+  /* Light theme colors - 2025 warm earthy palette */
+  --color-background: #FFF8E8;
+  --color-foreground: #674636;
+  --color-card: #FFFEF9;
+  --color-card-foreground: #674636;
+  --color-popover: #F7EED3;
+  --color-popover-foreground: #674636;
+  --color-primary: #C4CDB4;
+  --color-primary-foreground: #674636;
+  --color-secondary: #F1EAD0;
+  --color-secondary-foreground: #674636;
+  --color-muted: #F7F0E3;
+  --color-muted-foreground: #8A7866;
+  --color-accent: #AAB396;
+  --color-accent-foreground: #674636;
   --color-destructive: #D73027;
-  --color-destructive-foreground: #F8F9FA;
-  --color-border: #E5E7EB;
-  --color-input: #E5E7EB;
-  --color-ring: #EFBC9B;
-  --color-chart-1: #EFBC9B;
-  --color-chart-2: #9CAFAA;
-  --color-chart-3: #D6DAC8;
-  --color-chart-4: #B5C4A7;
-  --color-chart-5: #7A9B94;
+  --color-destructive-foreground: #FFF8E8;
+  --color-border: #E8DCC0;
+  --color-input: #E8DCC0;
+  --color-ring: #AAB396;
+  --color-chart-1: #AAB396;
+  --color-chart-2: #8A9B7A;
+  --color-chart-3: #C4D1B6;
+  --color-chart-4: #9FB08C;
+  --color-chart-5: #7A8F6E;
+  /* Accessibility variants */
+  --color-sage-accessible: #8A9B7A;
   /* Border radius */
   --radius: 0.5rem;
 }
