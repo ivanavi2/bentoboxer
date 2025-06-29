@@ -10,9 +10,9 @@ export function ToastProvider() {
       position="bottom-right"
       toastOptions={{
         style: {
-          background: 'hsl(var(--background))',
-          color: 'hsl(var(--foreground))',
-          border: '1px solid hsl(var(--border))',
+          background: 'var(--color-background)',
+          color: 'var(--color-foreground)',
+          border: '1px solid var(--color-border)',
         },
       }}
     />

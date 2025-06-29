@@ -16,7 +16,7 @@
   --color-secondary: #E2E8E0;
   --color-secondary-foreground: #2D3A37;
   --color-muted: #F1F3F2;
-  --color-muted-foreground: #6B7B73;
+  --color-muted-foreground: #5A6B5F;
   --color-accent: #9CAFAA;
   --color-accent-foreground: #2D3A37;
   --color-destructive: #D73027;
@@ -71,5 +71,121 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    line-height: 1.6;
+  }
+  
+  /* Improved focus indicators */
+  .focus-visible,
+  *:focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  
+  /* High contrast focus for better accessibility */
+  @media (prefers-contrast: high) {
+    .focus-visible,
+    *:focus-visible {
+      outline-width: 3px;
+      outline-offset: 3px;
+    }
+  }
+  
+  /* Reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Responsive typography utilities */
+  .text-responsive-xs { font-size: 0.75rem; line-height: 1rem; }
+  .text-responsive-sm { font-size: 0.875rem; line-height: 1.25rem; }
+  .text-responsive-base { font-size: 1rem; line-height: 1.5rem; }
+  .text-responsive-lg { font-size: 1.125rem; line-height: 1.75rem; }
+  .text-responsive-xl { font-size: 1.25rem; line-height: 2rem; }
+
+  @media (min-width: 768px) {
+    .text-responsive-sm { font-size: 0.875rem; line-height: 1.25rem; }
+    .text-responsive-base { font-size: 1rem; line-height: 1.5rem; }
+    .text-responsive-lg { font-size: 1.25rem; line-height: 1.75rem; }
+    .text-responsive-xl { font-size: 1.5rem; line-height: 2rem; }
+  }
+
+  @media (min-width: 1024px) {
+    .text-responsive-lg { font-size: 1.5rem; line-height: 2rem; }
+    .text-responsive-xl { font-size: 1.875rem; line-height: 2.25rem; }
+  }
+
+  /* Reading optimization */
+  .prose-optimal {
+    max-width: 65ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Semantic typography classes */
+  .heading-1 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+  
+  .heading-2 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+  
+  .heading-3 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+  
+  .heading-4 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+  }
+  
+  .heading-5 {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+  }
+  
+  .heading-6 {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .body-large {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+  
+  .body-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  
+  .body-small {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  
+  .caption {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: var(--color-muted-foreground);
   }
 }

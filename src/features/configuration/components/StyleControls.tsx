@@ -138,7 +138,7 @@ export function StyleControls() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-sm flex items-center gap-2">
+        <CardTitle className="text-lg flex items-center gap-2">
           <Palette className="h-4 w-4" />
           Box Styling
         </CardTitle>

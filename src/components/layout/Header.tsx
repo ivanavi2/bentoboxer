@@ -24,7 +24,7 @@ export function Header() {
           </Button>
           <div className="flex items-center gap-2">
             <div className="h-6 w-6 rounded bg-linear-to-br from-blue-500 to-purple-600" />
-            <h1 className="text-lg font-semibold">BentoBoxer</h1>
+            <h1 className="text-2xl font-semibold tracking-tight">BentoBoxer</h1>
           </div>
         </div>
 

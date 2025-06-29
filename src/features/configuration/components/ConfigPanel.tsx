@@ -50,7 +50,7 @@ export function ConfigPanel() {
       {/* Container Settings */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-sm">Container</CardTitle>
+          <CardTitle className="text-lg">Container</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
@@ -90,7 +90,7 @@ export function ConfigPanel() {
       {/* Boxes */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-sm">Boxes ({config.boxes.length})</CardTitle>
+          <CardTitle className="text-lg">Boxes ({config.boxes.length})</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2">
           <Button onClick={handleAddBox} variant="outline" className="w-full">
