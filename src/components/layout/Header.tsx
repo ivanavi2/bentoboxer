@@ -5,6 +5,7 @@
 import { useStore } from '@/lib/store';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/shared/ThemeToggle';
+import { ExportDialog } from '@/features/code-generation/components/ExportDialog';
 import { Menu, Download, Code, Eye } from 'lucide-react';
 import Image from 'next/image';
 
@@ -72,10 +73,12 @@ export function Header() {
           
           <div className="h-6 w-px bg-border mx-2" />
           
-          <Button variant="outline" size="sm">
-            <Download className="h-4 w-4 mr-1" />
-            Export
-          </Button>
+          <ExportDialog>
+            <Button variant="outline" size="sm">
+              <Download className="h-4 w-4 mr-1" />
+              Export
+            </Button>
+          </ExportDialog>
           
           <ThemeToggle />
         </div>

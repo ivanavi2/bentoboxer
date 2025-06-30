@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { useStore } from '@/lib/store';
 import { VanillaCSSGenerator } from '../generators/css/VanillaCSSGenerator';
 import { HTMLGenerator } from '../generators/html/HTMLGenerator';
+import { TailwindGenerator } from '../generators/tailwind/TailwindGenerator';
 
 export function useCodeGeneration() {
   const { config, outputFormat } = useStore();
@@ -20,11 +21,21 @@ export function useCodeGeneration() {
       };
     }
     
-    // TODO: Implement Tailwind generator
+    if (outputFormat === 'tailwind') {
+      const tailwindGenerator = new TailwindGenerator(config);
+      
+      return {
+        css: tailwindGenerator.generate(),
+        html: tailwindGenerator.generateHTML(),
+        complete: tailwindGenerator.generateCompleteHTML(),
+      };
+    }
+    
+    // Fallback for unknown formats
     return {
-      css: '/* Tailwind CSS generation not implemented yet */',
-      html: '<!-- Tailwind HTML generation not implemented yet -->',
-      complete: '<!-- Tailwind complete generation not implemented yet -->',
+      css: '/* Unknown output format */',
+      html: '<!-- Unknown output format -->',
+      complete: '<!-- Unknown output format -->',
     };
   }, [config, outputFormat]);
 
