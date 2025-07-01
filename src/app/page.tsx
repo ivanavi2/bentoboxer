@@ -5,9 +5,13 @@ import { GridEditor } from '@/features/grid-editor/components/GridEditor';
 import { CodeTabs } from '@/features/code-generation/components/CodeTabs';
 import { PreviewPane } from '@/features/preview/components/PreviewPane';
 import { useStore } from '@/lib/store';
+import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 
 export default function Home() {
   const { viewMode } = useStore();
+  
+  // Initialize keyboard shortcuts
+  useKeyboardShortcuts();
 
   const renderMainContent = () => {
     switch (viewMode) {

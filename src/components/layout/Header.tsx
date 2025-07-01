@@ -6,11 +6,13 @@ import { useStore } from '@/lib/store';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/shared/ThemeToggle';
 import { ExportDialog } from '@/features/code-generation/components/ExportDialog';
-import { Menu, Download, Eye, FileText, Edit3 } from 'lucide-react';
+import { Menu, Download, Eye, FileText, Edit3, Undo, Redo } from 'lucide-react';
+import { useUndoRedo } from '@/hooks/useUndoRedo';
 import Image from 'next/image';
 
 export function Header() {
   const { toggleSidebar, viewMode, setViewMode, outputFormat, setOutputFormat } = useStore();
+  const { canUndo, canRedo, undo, redo } = useUndoRedo();
 
   return (
     <header className="h-14 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -77,6 +79,27 @@ export function Header() {
             onClick={() => setOutputFormat('tailwind')}
           >
             Tailwind
+          </Button>
+          
+          <div className="h-6 w-px bg-border mx-2" />
+          
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={undo}
+            disabled={!canUndo}
+            title="Undo (Ctrl+Z)"
+          >
+            <Undo className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={redo}
+            disabled={!canRedo}
+            title="Redo (Ctrl+Y)"
+          >
+            <Redo className="h-4 w-4" />
           </Button>
           
           <div className="h-6 w-px bg-border mx-2" />
