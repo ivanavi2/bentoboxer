@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/home/sus/bentoboxer/logs/.4cc041da7b7a0cda3dacbac12e578db6377b7e7d-audit.json",
+    "files": [
+        {
+            "date": 1751374920488,
+            "name": "/home/sus/bentoboxer/logs/mcp-puppeteer-2025-07-01.log",
+            "hash": "eb165da9b6d69d6b23c95890100a19fa83117ba6e6d5e43945a9164c82c4f9be"
+        }
+    ],
+    "hashType": "sha256"
+}

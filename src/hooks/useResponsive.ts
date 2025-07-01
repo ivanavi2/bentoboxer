@@ -1,1 +1,0 @@
-// Custom hook for responsive breakpoint detection and handling

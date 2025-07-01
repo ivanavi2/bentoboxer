@@ -6,7 +6,7 @@ import { useStore } from '@/lib/store';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/shared/ThemeToggle';
 import { ExportDialog } from '@/features/code-generation/components/ExportDialog';
-import { Menu, Download, Code, Eye } from 'lucide-react';
+import { Menu, Download, Eye, FileText, Edit3 } from 'lucide-react';
 import Image from 'next/image';
 
 export function Header() {
@@ -42,7 +42,7 @@ export function Header() {
             size="sm"
             onClick={() => setViewMode('edit')}
           >
-            <Code className="h-4 w-4 mr-1" />
+            <Edit3 className="h-4 w-4 mr-1" />
             Edit
           </Button>
           <Button
@@ -52,6 +52,14 @@ export function Header() {
           >
             <Eye className="h-4 w-4 mr-1" />
             Preview
+          </Button>
+          <Button
+            variant={viewMode === 'code' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setViewMode('code')}
+          >
+            <FileText className="h-4 w-4 mr-1" />
+            Code
           </Button>
           
           <div className="h-6 w-px bg-border mx-2" />

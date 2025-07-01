@@ -18,6 +18,11 @@ export class HTMLGenerator extends BaseGenerator {
     return generateHTMLStructure(this.config);
   }
 
+  // Generate clean HTML for preview (same as generateHTML for vanilla)
+  generatePreviewHTML(): string {
+    return generateHTMLStructure(this.config);
+  }
+
   generateCompleteHTML(): string {
     const css = generateFullCSS(this.config);
     return generateCompleteHTML(this.config, css);

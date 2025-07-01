@@ -17,6 +17,7 @@ export function useCodeGeneration() {
       return {
         css: cssGenerator.generate(),
         html: htmlGenerator.generateHTML(),
+        previewHtml: htmlGenerator.generatePreviewHTML(),
         complete: htmlGenerator.generateCompleteHTML(),
       };
     }
@@ -27,6 +28,7 @@ export function useCodeGeneration() {
       return {
         css: tailwindGenerator.generate(),
         html: tailwindGenerator.generateHTML(),
+        previewHtml: tailwindGenerator.generatePreviewHTML(),
         complete: tailwindGenerator.generateCompleteHTML(),
       };
     }
@@ -35,6 +37,7 @@ export function useCodeGeneration() {
     return {
       css: '/* Unknown output format */',
       html: '<!-- Unknown output format -->',
+      previewHtml: '<!-- Unknown output format -->',
       complete: '<!-- Unknown output format -->',
     };
   }, [config, outputFormat]);

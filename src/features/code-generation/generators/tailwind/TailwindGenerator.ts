@@ -67,6 +67,22 @@ export class TailwindGenerator extends BaseGenerator {
     return this.formatOutput(html);
   }
 
+  // Generate clean HTML for preview (without comments)
+  generatePreviewHTML(): string {
+    let html = `<div class="${this.generateContainerClasses()}">\n`;
+    
+    this.config.boxes.forEach(box => {
+      const classes = generateBoxClasses(box);
+      html += `  <div class="${classes}">\n`;
+      html += `    ${box.content || 'Content'}\n`;
+      html += `  </div>\n`;
+    });
+    
+    html += '</div>';
+    
+    return html;
+  }
+
   // Generate complete HTML document with Tailwind CDN
   generateCompleteHTML(): string {
     const header = this.addComment('Complete HTML Document with Tailwind CSS');
@@ -76,7 +92,6 @@ export class TailwindGenerator extends BaseGenerator {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bento Grid</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>

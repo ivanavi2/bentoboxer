@@ -1,207 +1,135 @@
-# Next Session Implementation Plan
+# Phase 5 Implementation Plan: Advanced Features & Live Preview
 
-## 🎯 Primary Goal: Complete Code Generation UI (Phase 4)
+## Overview
+Phase 5 will transform BentoBoxer from a functional grid builder into a comprehensive design tool with live preview capabilities, responsive testing, and enhanced user experience features.
 
-**Estimated Time:** 2-3 hours  
-**Current Status:** 75% complete (client-side generation ready, UI missing)  
-**Priority:** HIGH - Critical user-facing functionality gap
+## Implementation Strategy
 
----
+### **Task 5.1: Core Preview System** (Priority: HIGH)
+**Goal**: Create a live preview that renders the actual grid layout using generated CSS/HTML
 
-## 🚨 Critical Missing Components
+#### 5.1.1: PreviewPane Component
+- **Live HTML/CSS Rendering**: Use iframe or shadow DOM to safely render generated code
+- **Real-time Updates**: Subscribe to config changes for instant preview updates
+- **Format Support**: Handle both vanilla CSS and Tailwind CSS preview modes
+- **Error Handling**: Graceful fallbacks when preview fails to render
+- **Integration**: Connect with existing viewMode system (Edit/Preview toggle)
 
-### **Client-Side Generation Ready, UI Missing:**
-```
-src/features/code-generation/
-├── generators/tailwind/
-│   ├── TailwindGenerator.ts     ❌ Only comment stub
-│   └── tailwindTemplates.ts    ❌ Only comment stub
-└── components/
-    ├── CodeOutput.tsx           ❌ Only comment stub  
-    ├── CodeTabs.tsx            ❌ Only comment stub
-    └── ExportDialog.tsx        ❌ Only comment stub
-```
+#### 5.1.2: usePreview Hook
+- **State Management**: Preview configuration, zoom level, responsive mode
+- **Code Generation Integration**: Use existing generators to create preview content
+- **Performance**: Debounced updates to prevent excessive re-renders
+- **Responsive State**: Current breakpoint, device simulation
 
-**What Works:** VanillaCSSGenerator + HTMLGenerator create code programmatically  
-**What's Missing:** Users cannot see, copy, or export the generated code
+### **Task 5.2: Responsive Preview System** (Priority: HIGH)
+**Goal**: Enable testing across different device breakpoints
 
----
+#### 5.2.1: ResponsivePreview Component
+- **Device Simulation**: Mobile (375px), Tablet (768px), Desktop (1024px+)
+- **Viewport Controls**: Adjustable preview container dimensions
+- **Orientation Support**: Portrait/landscape modes for mobile/tablet
+- **Breakpoint Indicators**: Visual feedback for current responsive state
 
-## 📋 Task Implementation Sequence
+#### 5.2.2: PreviewControls Component
+- **Device Selector**: Toggle between Mobile/Tablet/Desktop views
+- **Zoom Controls**: 25%, 50%, 75%, 100%, 125%, 150% zoom levels
+- **Orientation Toggle**: Portrait/Landscape for mobile/tablet
+- **Fullscreen Mode**: Dedicated preview window option
 
-### **Task 1: TailwindGenerator Implementation** (45 mins)
-**Priority:** HIGH - Complete the generation system
+### **Task 5.3: Enhanced User Experience** (Priority: MEDIUM)
+**Goal**: Add power-user features for efficiency
 
-**Files to Implement:**
+#### 5.3.1: Keyboard Shortcuts (useKeyboardShortcuts)
+- **Navigation**: `Tab` cycle through boxes, `Escape` deselect
+- **Actions**: `Ctrl+Z` undo, `Ctrl+Y` redo, `Delete` remove box
+- **Views**: `Ctrl+E` edit mode, `Ctrl+P` preview mode
+- **Export**: `Ctrl+S` export dialog, `Ctrl+C` copy current code
+
+#### 5.3.2: Undo/Redo System
+- **State History**: Track configuration changes with command pattern
+- **Memory Management**: Limit history to 50 states, efficient storage
+- **UI Integration**: Undo/Redo buttons in header or toolbar
+- **Keyboard Integration**: Standard Ctrl+Z/Ctrl+Y shortcuts
+
+### **Task 5.4: Grid Templates & Presets** (Priority: LOW)
+**Goal**: Provide starting points for common layouts
+
+#### 5.4.1: Template System
+- **Common Layouts**: Dashboard, Blog, Portfolio, Landing page templates
+- **Template Storage**: JSON-based template definitions
+- **Template Selector**: Modal or sidebar with preview thumbnails
+- **Custom Templates**: Save current grid as template
+
+## Technical Implementation Details
+
+### **View Mode Integration**
 ```typescript
-// src/features/code-generation/generators/tailwind/TailwindGenerator.ts
-- Extend BaseGenerator abstract class
-- Implement grid layout utilities: grid-cols-{n}, grid-rows-{n}, gap-{n}
-- Box positioning: col-span-{n}, row-span-{n}, col-start-{n}, row-start-{n}
-- Styling utilities: colors, borders, shadows, typography classes
-- Responsive utilities for different breakpoints
-
-// src/features/code-generation/generators/tailwind/tailwindTemplates.ts  
-- Grid-to-Tailwind class mapping logic
-- Template functions for grid container and box elements
-- Utility class generation based on styling configuration
-
-// Update: src/features/code-generation/hooks/useCodeGeneration.ts
-- Remove TODO comment on line 23
-- Import and integrate TailwindGenerator
-- Return proper Tailwind CSS and HTML output
+// Update page.tsx to handle preview mode
+{viewMode === 'edit' ? (
+  <GridEditor />
+) : viewMode === 'preview' ? (
+  <PreviewPane />
+) : (
+  <CodeTabs />
+)}
 ```
 
-**Key Requirements:**
-- Grid layout → `grid-cols-3 grid-rows-4 gap-4`
-- Box positioning → `col-span-2 row-span-1 col-start-1 row-start-2`
-- Colors → `bg-blue-500 text-white border-gray-300`
-- Typography → `font-inter text-lg font-semibold`
-- Shadows → `shadow-lg shadow-blue-500/20`
+### **Preview Rendering Strategy**
+1. **Shadow DOM Approach**: Isolated CSS rendering without affecting main app
+2. **Generated Content**: Use existing generators to create preview HTML/CSS
+3. **Real-time Updates**: Subscribe to store changes, debounced at 300ms
+4. **Error Boundaries**: Graceful fallback when preview fails
 
-### **Task 2: CodeOutput Component** (60 mins)  
-**Priority:** HIGH - Make generated code visible to users
-
-**Files to Implement:**
+### **Responsive Breakpoints**
 ```typescript
-// src/features/code-generation/components/CodeOutput.tsx
-- Syntax highlighting with Prism.js (already installed)
-- Copy-to-clipboard functionality (custom implementation for React 19)
-- Real-time updates using useCodeGeneration hook
-- Integration with outputFormat from store
-- Responsive design with scrollable code blocks
-
-// src/features/code-generation/components/CodeTabs.tsx
-- Tabbed interface: HTML, CSS, Tailwind
-- Active tab highlighting
-- Individual copy buttons per tab
-- Format-specific syntax highlighting
-
-// Integration with existing custom clipboard utility
-- Use src/lib/utils/clipboard.ts (already implemented)
-- Avoid react-copy-to-clipboard due to React 19 compatibility
+const breakpoints = {
+  mobile: { width: 375, height: 667 },
+  tablet: { width: 768, height: 1024 },
+  desktop: { width: 1200, height: 800 }
+};
 ```
 
-**Key Requirements:**
-- **Prism.js Integration:** HTML, CSS syntax highlighting
-- **Copy Functionality:** Individual copy buttons for each code section
-- **Real-time Updates:** Auto-refresh when grid configuration changes
-- **Format Toggle:** Seamless switching between Vanilla CSS and Tailwind
-- **Responsive Design:** Works on mobile and desktop
+### **State Management Extensions**
+- **PreviewSlice**: Add to Zustand store for preview-specific state
+- **ResponsiveState**: Current breakpoint, orientation, zoom level
+- **HistorySlice**: Undo/redo state management with command pattern
 
-### **Task 3: Main Layout Integration** (30 mins)
-**Priority:** HIGH - Connect UI with existing view system
+## File Structure
+```
+src/features/preview/
+├── components/
+│   ├── PreviewPane.tsx          # Main live preview component
+│   ├── ResponsivePreview.tsx    # Device simulation wrapper
+│   ├── PreviewControls.tsx      # Zoom, breakpoint controls
+│   └── PreviewRenderer.tsx      # Isolated HTML/CSS renderer
+├── hooks/
+│   ├── usePreview.ts           # Preview state management
+│   └── useResponsivePreview.ts # Responsive breakpoint logic
+└── types/
+    └── preview.ts              # Preview-specific types
 
-**Files to Update:**
-```typescript
-// src/app/page.tsx
-- Handle viewMode from store (edit/preview)
-- Edit Mode: <GridEditor />
-- Preview Mode: <CodeOutput /> or split view
-- Maintain responsive layout structure
+src/hooks/
+├── useKeyboardShortcuts.ts     # Global keyboard shortcuts
+└── useUndoRedo.ts             # Undo/redo functionality
 
-// Optional Enhancement: Split view for simultaneous editing and code preview
+src/lib/store/slices/
+├── previewSlice.ts             # Preview state
+└── historySlice.ts             # Undo/redo state
 ```
 
-**Key Requirements:**
-- **View Mode Integration:** Use existing Header Edit/Preview toggle
-- **Layout Preservation:** Maintain current responsive sidebar layout
-- **State Synchronization:** Ensure code updates reflect grid changes instantly
+## Success Criteria
+1. **Functional Preview**: Live rendering of generated grid with real-time updates
+2. **Responsive Testing**: Accurate device simulation across breakpoints
+3. **Enhanced UX**: Keyboard shortcuts and undo/redo working seamlessly
+4. **Performance**: Smooth interactions with no lag during preview updates
+5. **Integration**: Seamless connection with existing code generation system
 
-### **Task 4: ExportDialog Implementation** (45 mins)
-**Priority:** MEDIUM - Enhanced user experience
+## Estimated Effort
+- **PreviewPane & Core**: 2-3 hours
+- **Responsive System**: 1-2 hours  
+- **Keyboard Shortcuts**: 1 hour
+- **Undo/Redo**: 2 hours
+- **Templates**: 1-2 hours
+- **Testing & Polish**: 1 hour
 
-**Files to Implement:**
-```typescript
-// src/features/code-generation/components/ExportDialog.tsx
-- Download functionality for generated code
-- Format selection (Vanilla CSS / Tailwind)
-- Multiple export options:
-  - Separate files (HTML, CSS)
-  - Complete HTML document
-  - Zip archive with all files
-- Integration with Header export button
-```
-
-**Key Requirements:**
-- **Download Options:** Individual files or complete package
-- **Format Selection:** Respect current outputFormat setting
-- **File Naming:** Logical naming convention (grid.html, grid.css, etc.)
-
----
-
-## 🎯 Success Metrics for Next Session
-
-### **User Experience Goals:**
-1. ✅ **Code Visibility:** Users can see generated HTML/CSS code in real-time
-2. ✅ **Format Switching:** Users can toggle between Vanilla CSS and Tailwind formats seamlessly
-3. ✅ **Copy Functionality:** Users can copy generated code to clipboard with one click
-4. ✅ **Export Capability:** Users can download their work as files
-5. ✅ **Preview Mode:** Header preview mode becomes fully functional
-
-### **Technical Goals:**
-1. ✅ **Complete TailwindGenerator:** Comprehensive utility class mapping for all grid features
-2. ✅ **Syntax Highlighting:** Professional code display with Prism.js
-3. ✅ **View Mode Integration:** Seamless Edit/Preview switching using existing Header controls
-4. ✅ **Type Safety:** Maintain existing type safety and error handling standards
-5. ✅ **Performance:** Real-time updates without performance degradation
-
-### **Quality Assurance:**
-1. ✅ **Generated Code Quality:** Valid, clean HTML/CSS/Tailwind output
-2. ✅ **Cross-browser Compatibility:** Copy functionality works across browsers
-3. ✅ **Mobile Responsiveness:** Code display works on mobile devices
-4. ✅ **Error Handling:** Graceful handling of edge cases and invalid states
-
----
-
-## 🔧 Implementation Approach
-
-### **Recommended Order:**
-1. **TailwindGenerator First** → Complete the client-side generation system
-2. **CodeOutput Components** → Make generated code visible to users  
-3. **Layout Integration** → Connect everything together
-4. **Export Dialog** → Complete the user experience
-
-### **Why This Sequence:**
-- **Foundation First:** Complete the generation system before building UI
-- **Core Functionality:** Users need to see code before they can export it
-- **Incremental Value:** Each step provides visible user value
-- **Risk Mitigation:** Test generation before building complex UI
-
----
-
-## 🚀 Expected Outcome
-
-**End State:** Fully functional bento grid creator with complete code generation and export capabilities.
-
-**User Journey:**
-1. **Create Grid:** Configure dimensions, add boxes, customize styling
-2. **View Code:** See generated HTML/CSS/Tailwind in real-time
-3. **Switch Formats:** Toggle between Vanilla CSS and Tailwind
-4. **Copy & Export:** Copy code or download files
-5. **Preview Mode:** See final result without editor UI
-
-**Architecture Benefits:**
-- **Client-Side Only:** No server dependencies, works offline
-- **Maintainable:** Clean separation between generation and display
-- **Extensible:** Easy to add new output formats
-- **Type-Safe:** Full TypeScript integration
-- **Performant:** Efficient real-time updates
-
----
-
-## 🔮 Post-Implementation (Future Sessions)
-
-### **Phase 5 Priorities:**
-1. **PreviewPane:** Real-time grid preview with responsive modes
-2. **UX Enhancements:** Keyboard shortcuts, undo/redo, grid templates
-3. **Mobile Optimization:** Touch-friendly controls, responsive design
-
-### **Phase 6 Polish:**
-1. **Performance:** Lazy loading, memoization, debounced updates
-2. **Testing:** Unit tests, integration tests, cross-browser testing
-3. **Documentation:** User guide, API docs, setup instructions
-
----
-
-*Implementation plan for BentoBoxer next development session. Focus on completing Phase 4 code generation UI.*
+**Total**: 7-11 hours for complete Phase 5 implementation
