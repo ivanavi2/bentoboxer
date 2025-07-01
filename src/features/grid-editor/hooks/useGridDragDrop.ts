@@ -9,11 +9,11 @@ import {
 } from '@dnd-kit/core';
 import { useState } from 'react';
 import { GridBox } from '@/lib/types';
-import { useStore } from '@/lib/store';
+import { useEditorWithHistory } from '@/hooks/useEditorWithHistory';
 import { canPlaceBoxAt } from '@/lib/utils/gridUtils';
 
 export function useGridDragDrop() {
-  const { config, updateBox } = useStore();
+  const { config, updateBox } = useEditorWithHistory();
   const [activeBox, setActiveBox] = useState<GridBox | null>(null);
 
   const sensors = useSensors(

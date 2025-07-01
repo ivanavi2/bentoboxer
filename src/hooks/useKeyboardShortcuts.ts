@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useStore } from '@/lib/store';
+import { useEditorWithHistory } from '@/hooks/useEditorWithHistory';
 import { useUndoRedo } from './useUndoRedo';
 
 export const useKeyboardShortcuts = () => {
+  const { setViewMode } = useStore();
   const { 
     setSelectedBox, 
     removeBox, 
-    selectedBox,
-    setViewMode
-  } = useStore();
+    selectedBox
+  } = useEditorWithHistory();
   
   const { undo, redo, canUndo, canRedo } = useUndoRedo();
 

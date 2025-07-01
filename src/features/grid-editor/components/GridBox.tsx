@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { GridBox as GridBoxType } from '@/lib/types';
-import { useStore } from '@/lib/store';
+import { useEditorWithHistory } from '@/hooks/useEditorWithHistory';
 import { Button } from '@/components/ui/button';
 import { X, GripVertical } from 'lucide-react';
 import { useDraggable, useDroppable } from '@dnd-kit/core';
@@ -14,7 +14,7 @@ interface GridBoxProps {
 }
 
 export function GridBox({ box, isSelected, onSelect }: GridBoxProps) {
-  const { removeBox } = useStore();
+  const { removeBox } = useEditorWithHistory();
   
   const {
     attributes,

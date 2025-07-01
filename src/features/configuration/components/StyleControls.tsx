@@ -1,6 +1,7 @@
 'use client';
 
 import { useStore } from '@/lib/store';
+import { useEditorWithHistory } from '@/hooks/useEditorWithHistory';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Label } from '@/components/ui/label';
@@ -93,7 +94,8 @@ function ColorPicker({ value, onChange, label }: ColorPickerProps) {
 }
 
 export function StyleControls() {
-  const { selectedBox, config, updateBoxStyling, updateBox } = useStore();
+  const { selectedBox } = useStore();
+  const { config, updateBoxStyling, updateBox } = useEditorWithHistory();
   
   const selectedBoxData = selectedBox 
     ? config.boxes.find(box => box.id === selectedBox)

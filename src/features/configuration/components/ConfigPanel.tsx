@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useStore } from '@/lib/store';
+import { useEditorWithHistory } from '@/hooks/useEditorWithHistory';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
@@ -18,9 +18,9 @@ export function ConfigPanel() {
   const { 
     config, 
     updateConfig, 
-    resetConfig,
-    addBox
-  } = useStore();
+    addBox,
+    resetConfig
+  } = useEditorWithHistory();
 
   const handleAddBox = () => {
     const position = findNextAvailablePosition(config, 1, 1);
@@ -32,7 +32,7 @@ export function ConfigPanel() {
     }
     
     const newBox = {
-      id: `box-${Date.now()}`,
+      id: `box-${crypto.randomUUID()}`,
       x: position.x,
       y: position.y,
       width: 1,

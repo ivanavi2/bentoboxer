@@ -2,13 +2,13 @@
 
 'use client';
 
-import { useStore } from '@/lib/store';
+import { useEditorWithHistory } from '@/hooks/useEditorWithHistory';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export function DimensionControls() {
-  const { config, updateConfig } = useStore();
+  const { config, updateConfig } = useEditorWithHistory();
 
   return (
     <Card>
