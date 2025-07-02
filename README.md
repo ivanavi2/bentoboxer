@@ -1,6 +1,6 @@
 # 🍱 BentoBoxer
 
-**Transform your ideas into stunning bento grid layouts in seconds.** BentoBoxer is the intuitive drag-and-drop editor that makes creating beautiful, responsive bento box layouts as easy as arranging lunch boxes.
+**Transform your ideas into stunning bento grid layouts in seconds.** BentoBoxer is an intuitive drag-and-drop editor that makes creating beautiful, responsive bento box layouts as easy as arranging lunch boxes.
 
 ## ✨ Key Features
 
