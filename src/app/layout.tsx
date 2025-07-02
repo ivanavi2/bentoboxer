@@ -3,6 +3,7 @@ import { Sora, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { ToastProvider } from "@/providers/ToastProvider";
+import { Analytics } from "@vercel/analytics/react";
 
 const sora = Sora({
   variable: "--font-sora",
@@ -102,6 +103,7 @@ export default function RootLayout({
         <ThemeProvider>
           {children}
           <ToastProvider />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
