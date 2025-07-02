@@ -12,11 +12,11 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        "w-80 bg-muted/50 border-r transition-all duration-300 overflow-y-auto",
-        sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        "bg-muted/50 border-r transition-all duration-300 overflow-hidden",
+        sidebarOpen ? "w-80" : "w-0"
       )}
     >
-      <div className="p-4">
+      <div className="p-4 w-80 overflow-y-auto h-full">
         <h2 className="text-lg font-semibold mb-4">Configuration</h2>
         <ConfigPanel />
       </div>

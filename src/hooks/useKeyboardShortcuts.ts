@@ -67,34 +67,12 @@ export const useKeyboardShortcuts = () => {
           }
           break;
 
-        // Copy current code (Ctrl+C when no text selected)
-        case 'c':
-        case 'C':
-          if (isModifierPressed && window.getSelection()?.toString() === '') {
-            // Trigger copy code action - this would need to be connected to code generation
-            event.preventDefault();
-            console.log('Copy code shortcut triggered');
-          }
-          break;
-
-        // Export dialog (Ctrl+S)
-        case 's':
-        case 'S':
-          if (isModifierPressed) {
-            // Trigger export dialog - would need to be connected to export functionality
-            event.preventDefault();
-            console.log('Export shortcut triggered');
-          }
-          break;
 
         // Undo/Redo shortcuts
         case 'z':
         case 'Z':
           if (isModifierPressed && !event.shiftKey && canUndo) {
             undo();
-            event.preventDefault();
-          } else if (isModifierPressed && event.shiftKey && canRedo) {
-            redo();
             event.preventDefault();
           }
           break;
@@ -132,10 +110,7 @@ export const useKeyboardShortcuts = () => {
         'Ctrl+G': 'Switch to Code generation mode',
       },
       actions: {
-        'Ctrl+C': 'Copy current code (when no text selected)',
-        'Ctrl+S': 'Open export dialog',
         'Ctrl+Z': 'Undo last action',
-        'Ctrl+Shift+Z': 'Redo last undone action',
         'Ctrl+Y': 'Redo last undone action',
       }
     }

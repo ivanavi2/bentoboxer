@@ -19,12 +19,7 @@ export function AppLayout({ children }: AppLayoutProps) {
       <Header />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar />
-        <main 
-          className={cn(
-            "flex-1 overflow-auto transition-all duration-300",
-            sidebarOpen ? "ml-0" : "ml-0"
-          )}
-        >
+        <main className="flex-1 overflow-auto transition-all duration-300">
           {children}
         </main>
       </div>

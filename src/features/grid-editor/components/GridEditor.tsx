@@ -6,6 +6,7 @@ import { GridBox } from './GridBox';
 import { GridCell } from './GridCell';
 import { useGridDragDrop } from '../hooks/useGridDragDrop';
 import { isPositionOccupied, canPlaceBoxAt } from '@/lib/utils/gridUtils';
+import { KeyboardShortcutsTooltip } from '@/components/KeyboardShortcutsTooltip';
 
 export function GridEditor() {
   const { config, selectedBox, setSelectedBox } = useStore();
@@ -111,6 +112,7 @@ export function GridEditor() {
           onClick={handleGridClick}
           className="relative overflow-hidden"
         >
+          <KeyboardShortcutsTooltip />
           {renderGridLines()}
           {renderGridCells()}
           
