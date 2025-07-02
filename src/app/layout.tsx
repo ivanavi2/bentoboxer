@@ -20,8 +20,72 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BentoBoxer - Visual Bento Grid Creator",
-  description: "Create beautiful bento grid layouts with an intuitive visual editor",
+  title: {
+    template: '%s | BentoBoxer - Bento Grid Editor',
+    default: 'BentoBoxer - Visual Bento Grid Editor & Layout Creator'
+  },
+  description: 'Create stunning bento box layouts with our intuitive drag-and-drop editor. Generate responsive CSS/HTML code for dashboard designs, portfolios, and modern web interfaces. Free online bento grid creator with live preview.',
+  keywords: [
+    'bento grid editor',
+    'bento box layout',
+    'grid design tool',
+    'dashboard creator',
+    'bento grid generator',
+    'visual layout editor',
+    'css grid builder',
+    'responsive grid designer',
+    'no-code grid tool',
+    'web layout creator'
+  ],
+  authors: [{ name: 'BentoBoxer Team' }],
+  creator: 'BentoBoxer',
+  publisher: 'BentoBoxer',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://bentoboxer.com'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'BentoBoxer - Visual Bento Grid Editor & Layout Creator',
+    description: 'Create stunning bento box layouts with our intuitive drag-and-drop editor. Generate responsive CSS/HTML code for modern web interfaces.',
+    url: 'https://bentoboxer.com',
+    siteName: 'BentoBoxer',
+    images: [
+      {
+        url: '/logo.png',
+        width: 858,
+        height: 858,
+        alt: 'BentoBoxer - Bento Grid Editor Logo',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'BentoBoxer - Visual Bento Grid Editor',
+    description: 'Create stunning bento box layouts with our intuitive drag-and-drop editor. Generate responsive CSS/HTML code.',
+    images: ['/logo.png'],
+    creator: '@bentoboxer',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'google-site-verification-token',
+  },
 };
 
 export default function RootLayout({
