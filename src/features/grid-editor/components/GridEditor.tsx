@@ -101,7 +101,7 @@ export function GridEditor() {
   };
 
   return (
-    <div className="w-full h-full flex items-center justify-center p-4">
+    <div className="w-full h-full flex items-center justify-center p-2 sm:p-4">
       <DndContext
         sensors={sensors}
         onDragStart={handleDragStart}

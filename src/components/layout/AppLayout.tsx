@@ -14,10 +14,12 @@ export function AppLayout({ children }: AppLayoutProps) {
   return (
     <div className="h-screen flex flex-col bg-background">
       <Header />
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden relative">
         <Sidebar />
-        <main className="flex-1 overflow-auto transition-all duration-300">
-          {children}
+        <main className="flex-1 overflow-auto transition-all duration-300 min-w-0">
+          <div className="p-2 sm:p-4 md:p-6">
+            {children}
+          </div>
         </main>
       </div>
     </div>
