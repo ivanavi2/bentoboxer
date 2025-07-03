@@ -44,10 +44,11 @@ export function PreviewPane({ className }: PreviewPaneProps) {
       padding: 20px; 
       font-family: system-ui, -apple-system, sans-serif;
       background: #f8fafc;
+      min-height: 100vh;
     }
     .preview-container {
       width: 100%;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -74,10 +75,11 @@ export function PreviewPane({ className }: PreviewPaneProps) {
       padding: 20px; 
       font-family: system-ui, -apple-system, sans-serif;
       background: #f8fafc;
+      min-height: 100vh;
     }
     .preview-container {
       width: 100%;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -121,36 +123,35 @@ export function PreviewPane({ className }: PreviewPaneProps) {
 
       {/* Preview Content */}
       <div className="flex-1 flex flex-col p-4 bg-muted/30 min-h-0">
-        <div className="flex-1 flex items-center justify-center">
+        <div className="w-full" style={{ height: 'calc(100vh - 200px)' }}>
           {previewError ? (
             <Alert className="max-w-md">
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>{previewError}</AlertDescription>
             </Alert>
           ) : (
-            <Card className="preview-frame overflow-hidden shadow-lg w-full h-full p-0">
+            <Card className="preview-frame overflow-hidden shadow-lg w-full h-full p-0" style={{ minHeight: '600px', height: '600px' }}>
               <div 
-                className="relative bg-white overflow-auto"
+                className="relative bg-white overflow-hidden w-full h-full"
                 style={{
-                  width: '100%',
-                  height: '100%'
+                  minHeight: '600px',
+                  height: '600px'
                 }}
               >
 
                 {/* Preview Iframe */}
                 <iframe
                   srcDoc={previewDocument}
-                  className="border-0 origin-top-left"
+                  className="border-0 origin-top-left w-full h-full"
                   sandbox="allow-scripts"
                   onLoad={handleIframeLoad}
                   onError={handleIframeError}
                   title="Grid Preview"
                   style={{
                     transform: `scale(${previewState.zoom})`,
+                    transformOrigin: 'top left',
                     width: previewState.zoom !== 1 ? `${100 / previewState.zoom}%` : '100%',
-                    height: previewState.zoom !== 1 ? `${100 / previewState.zoom}%` : '100%',
-                    minWidth: previewState.zoom < 1 ? `${100 / previewState.zoom}%` : '100%',
-                    minHeight: previewState.zoom < 1 ? `${100 / previewState.zoom}%` : '100%'
+                    height: previewState.zoom !== 1 ? `${100 / previewState.zoom}%` : '100%'
                   }}
                 />
 
