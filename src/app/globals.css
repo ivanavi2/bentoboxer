@@ -138,6 +138,72 @@
     letter-spacing: -0.025em;
   }
   
+  /* Stylized title with fun underlines and tilt */
+  .title-stylized {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    transform: rotate(-2deg);
+    position: relative;
+    display: inline-block;
+    transition: transform 0.3s ease;
+    margin-bottom: 35px; /* Account for underlines with proper spacing */
+    
+    /* Fun stylized border */
+    border: 3px dashed var(--color-primary);
+    border-radius: 12px;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+      0 0 0 1px rgba(255, 255, 255, 0.1),
+      0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title-stylized:hover {
+    transform: rotate(-1deg) scale(1.02);
+  }
+  
+  /* Decorative underlines using pseudo-elements */
+  .title-stylized::before {
+    content: '';
+    position: absolute;
+    bottom: -18px;
+    left: -5px;
+    right: -5px;
+    height: 3px;
+    background: var(--color-primary);
+    border-radius: 3px;
+    transform: rotate(1deg);
+    opacity: 0.8;
+  }
+  
+  .title-stylized::after {
+    content: '';
+    position: absolute;
+    bottom: -28px;
+    left: 10px;
+    right: -10px;
+    height: 2px;
+    background: var(--color-accent);
+    border-radius: 2px;
+    transform: rotate(-1deg);
+    opacity: 0.6;
+  }
+  
+  /* Mobile responsive adjustments */
+  @media (max-width: 640px) {
+    .title-stylized {
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+      padding: 10px 16px; /* Smaller padding on mobile */
+      border-width: 2px; /* Thinner border on mobile */
+      border-radius: 10px; /* Slightly smaller radius */
+    }
+  }
+
+  
   .heading-2 {
     font-size: 1.875rem;
     line-height: 2.25rem;

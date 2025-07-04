@@ -26,7 +26,7 @@ export function AppLayout({ children }: AppLayoutProps) {
       <div className="flex flex-1 overflow-hidden relative">
         <Sidebar />
         <main className="flex-1 overflow-auto transition-all duration-300 min-w-0">
-          <div className={contentPadding}>
+          <div className={`${contentPadding} h-full`}>
             {children}
           </div>
         </main>
