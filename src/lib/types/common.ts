@@ -29,4 +29,5 @@ export interface ExportOptions {
 
 export type ThemeMode = 'light' | 'dark' | 'system';
 export type OutputFormat = 'vanilla' | 'tailwind';
-export type ViewMode = 'edit' | 'preview' | 'code';
+export type ViewMode = 'home' | 'editor';
+export type EditorViewMode = 'edit' | 'preview' | 'code';

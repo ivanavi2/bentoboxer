@@ -4,7 +4,7 @@ import { useEditorWithHistory } from '@/hooks/useEditorWithHistory';
 import { useUndoRedo } from './useUndoRedo';
 
 export const useKeyboardShortcuts = () => {
-  const { setViewMode } = useStore();
+  const { setViewMode, setEditorViewMode, viewMode } = useStore();
   const { 
     setSelectedBox, 
     removeBox, 
@@ -42,27 +42,39 @@ export const useKeyboardShortcuts = () => {
           }
           break;
 
-        // View mode shortcuts
+        // View mode shortcuts (only work in editor mode)
+        case 'h':
+        case 'H':
+          if (isModifierPressed) {
+            setViewMode('home');
+            event.preventDefault();
+          }
+          break;
+
         case 'e':
         case 'E':
           if (isModifierPressed) {
-            setViewMode('edit');
+            if (viewMode === 'editor') {
+              setEditorViewMode('edit');
+            } else {
+              setViewMode('editor');
+            }
             event.preventDefault();
           }
           break;
 
         case 'p':
         case 'P':
-          if (isModifierPressed) {
-            setViewMode('preview');
+          if (isModifierPressed && viewMode === 'editor') {
+            setEditorViewMode('preview');
             event.preventDefault();
           }
           break;
 
         case 'g':
         case 'G':
-          if (isModifierPressed) {
-            setViewMode('code');
+          if (isModifierPressed && viewMode === 'editor') {
+            setEditorViewMode('code');
             event.preventDefault();
           }
           break;
@@ -95,7 +107,7 @@ export const useKeyboardShortcuts = () => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [selectedBox, setSelectedBox, removeBox, setViewMode, undo, redo, canUndo, canRedo]);
+  }, [selectedBox, setSelectedBox, removeBox, setViewMode, setEditorViewMode, viewMode, undo, redo, canUndo, canRedo]);
 
   // Return key mappings for documentation/help
   return {
@@ -105,9 +117,10 @@ export const useKeyboardShortcuts = () => {
         'Delete/Backspace': 'Remove selected box',
       },
       views: {
-        'Ctrl+E': 'Switch to Edit mode',
-        'Ctrl+P': 'Switch to Preview mode', 
-        'Ctrl+G': 'Switch to Code generation mode',
+        'Ctrl+H': 'Switch to Home view',
+        'Ctrl+E': 'Switch to Editor view / Edit mode',
+        'Ctrl+P': 'Switch to Preview mode (in editor)',
+        'Ctrl+G': 'Switch to Code generation mode (in editor)',
       },
       actions: {
         'Ctrl+Z': 'Undo last action',

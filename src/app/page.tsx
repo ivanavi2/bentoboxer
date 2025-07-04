@@ -1,9 +1,8 @@
 'use client';
 
 import { AppLayout } from '@/components/layout/AppLayout';
-import { GridEditor } from '@/features/grid-editor/components/GridEditor';
-import { CodeTabs } from '@/features/code-generation/components/CodeTabs';
-import { PreviewPane } from '@/features/preview/components/PreviewPane';
+import { HomePage } from '@/components/pages/HomePage';
+import { EditorPage } from '@/components/pages/EditorPage';
 import { useStore } from '@/lib/store';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import Script from 'next/script';
@@ -16,19 +15,13 @@ export default function Home() {
 
   const renderMainContent = () => {
     switch (viewMode) {
-      case 'edit':
-        return <GridEditor />;
-      case 'preview':
-        return <PreviewPane />;
-      case 'code':
-        return (
-          <div className="p-6">
-            <CodeTabs />
-          </div>
-        );
+      case 'home':
+        return <HomePage />;
+      case 'editor':
+        return <EditorPage />;
       default:
-        // Fallback to edit mode for any unknown view mode
-        return <GridEditor />;
+        // Fallback to home for any unknown view mode
+        return <HomePage />;
     }
   };
 

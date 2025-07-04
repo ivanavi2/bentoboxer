@@ -11,10 +11,14 @@ interface AppLayoutProps {
 }
 
 export function AppLayout({ children }: AppLayoutProps) {
-  const { viewMode } = useStore();
+  const { viewMode, editorViewMode } = useStore();
   
   // Reduce padding in preview mode for better space utilization
-  const contentPadding = viewMode === 'preview' ? 'p-2' : 'p-2 sm:p-4 md:p-6';
+  // Also reduce padding for home page and editor views that don't need it
+  const contentPadding = 
+    viewMode === 'home' ? 'p-0' : 
+    (viewMode === 'editor' && editorViewMode === 'preview') ? 'p-0' : 
+    'p-0';
 
   return (
     <div className="h-screen flex flex-col bg-background">

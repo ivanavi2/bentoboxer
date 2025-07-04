@@ -7,7 +7,12 @@ import { ConfigPanel } from '@/features/configuration/components/ConfigPanel';
 import { cn } from '@/lib/utils';
 
 export function Sidebar() {
-  const { sidebarOpen } = useStore();
+  const { sidebarOpen, viewMode } = useStore();
+
+  // Only show sidebar in editor mode
+  if (viewMode !== 'editor') {
+    return null;
+  }
 
   return (
     <aside
